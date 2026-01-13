@@ -2,7 +2,9 @@ package py.gov.hospital.quirofanos_monitor.service;
 
 import java.time.LocalDateTime;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import jakarta.transaction.Transactional;
 import py.gov.hospital.quirofanos_monitor.model.Cirugia;
@@ -28,7 +30,10 @@ public class CirugiaService {
                 .orElseThrow(() -> new RuntimeException("Quirofano no encontrado"));
         // Regla hospitalaria CLAVE
         if (q.getEstado() == EstadoQuirofano.OCUPADO) {
-            throw new RuntimeException("Quirofano ocupado");
+                    throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "Quirofano no encontrado"
+        );
         }
 
         q.setEstado(EstadoQuirofano.OCUPADO);
