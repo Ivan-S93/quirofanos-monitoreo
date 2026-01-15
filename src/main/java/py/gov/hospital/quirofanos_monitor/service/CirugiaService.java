@@ -47,4 +47,21 @@ public class CirugiaService {
                 .build();
         return cirugiaRepository.save(c);
     }
+
+    @Transactional
+    public Cirugia finalizarCirugia(Long quirofanoId) {
+
+        Cirugia cirugia = cirugiaRepository.findByQuirofanoIdAndEstado(quirofanoId, EstadoCirugia.EN_CURSO)
+                .orElseThrow(() -> new RuntimeException("No hay cirugia en curso en este quirofano"));
+
+        // Finalizar la cirugia
+        cirugia.setEstado(EstadoCirugia.FINALIZADA);
+        cirugia.setHoraFinReal(LocalDateTime.now());
+
+        //Liberar quirofano
+        Quirofano q = cirugia.getQuirofano();
+        q.setEstado(EstadoQuirofano.DISPONIBLE);
+
+        return cirugiaRepository.save(cirugia);
+    }
 }

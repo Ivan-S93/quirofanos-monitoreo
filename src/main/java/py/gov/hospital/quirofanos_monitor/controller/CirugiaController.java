@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 import py.gov.hospital.quirofanos_monitor.model.Cirugia;
 import py.gov.hospital.quirofanos_monitor.service.CirugiaService;
 
+
+
 @RestController
 @RequestMapping("/api/cirugias")
 
@@ -27,5 +29,10 @@ public class CirugiaController {
 
                 return service.iniciarCirugia(quirofanoId, descripcion, duracion);
             }
+    
+    @PostMapping("finalizar/{quirofanoId}")
+    public Cirugia finalizar(@PathVariable Long quirofanoId) {
+        return service.finalizarCirugia(quirofanoId);
+    } 
     
 }
