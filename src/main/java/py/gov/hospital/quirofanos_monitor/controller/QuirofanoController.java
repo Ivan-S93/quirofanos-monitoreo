@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import py.gov.hospital.quirofanos_monitor.dto.QuirofanoEstadoDTO;
 import py.gov.hospital.quirofanos_monitor.model.Quirofano;
 import py.gov.hospital.quirofanos_monitor.repository.QuirofanoRepository;
 import py.gov.hospital.quirofanos_monitor.service.QuirofanoService;
@@ -41,7 +42,7 @@ public class QuirofanoController {
     // Estado actual (para el frontend)
     @GetMapping("/estado")
 
-    public List<Quirofano> estadoActual(){
+    public List<QuirofanoEstadoDTO> estadoActual(){
         return service.obtenerEstadoActual();
     }
 
