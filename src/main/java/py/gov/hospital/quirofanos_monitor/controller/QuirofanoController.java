@@ -11,15 +11,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import py.gov.hospital.quirofanos_monitor.model.Quirofano;
 import py.gov.hospital.quirofanos_monitor.repository.QuirofanoRepository;
+import py.gov.hospital.quirofanos_monitor.service.QuirofanoService;
+
 
 @RestController
 @RequestMapping("/api/quirofanos")
 public class QuirofanoController {
     
     private final QuirofanoRepository repository;
+    private final QuirofanoService service;
 
-    public QuirofanoController(QuirofanoRepository repository) {
+    public QuirofanoController(QuirofanoRepository repository, QuirofanoService service) {
         this.repository = repository;
+        this.service = service;
     }
 
     // Crear quirofanos
@@ -32,6 +36,13 @@ public class QuirofanoController {
     @GetMapping
     public List<Quirofano> listar() {
         return repository.findAll();
+    }
+
+    // Estado actual (para el frontend)
+    @GetMapping("/estado")
+
+    public List<Quirofano> estadoActual(){
+        return service.obtenerEstadoActual();
     }
 
     // Obtener por ID ( util luego)
