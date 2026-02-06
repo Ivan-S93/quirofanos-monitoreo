@@ -15,6 +15,8 @@ import py.gov.hospital.quirofanos_monitor.repository.QuirofanoRepository;
 import py.gov.hospital.quirofanos_monitor.service.QuirofanoService;
 
 
+
+
 @RestController
 @RequestMapping("/api/quirofanos")
 public class QuirofanoController {
@@ -40,16 +42,18 @@ public class QuirofanoController {
     }
 
     // Estado actual (para el frontend)
-    @GetMapping("/estado")
-
-    public List<QuirofanoEstadoDTO> estadoActual(){
+   @GetMapping("/estado")
+    public List<QuirofanoEstadoDTO> estadoActual() {
         return service.obtenerEstadoActual();
-    }
+}
+    
 
     // Obtener por ID ( util luego)
     @GetMapping("/{id}")
     public Quirofano obtener(@PathVariable Long id) {
         return repository.findById(id).orElseThrow(() -> new RuntimeException("Quirofano no encontrado"));
     }
+
+
 
 }

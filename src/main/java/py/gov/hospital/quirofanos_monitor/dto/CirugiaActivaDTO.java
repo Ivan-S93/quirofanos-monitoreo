@@ -12,4 +12,5 @@ public class CirugiaActivaDTO {
     private String descripcion;
     private LocalDateTime horaInicio;
     private Integer duracionEstimada;
+    private Integer minutosTranscurridos;
 }

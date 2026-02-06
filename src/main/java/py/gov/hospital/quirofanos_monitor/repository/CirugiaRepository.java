@@ -13,4 +13,12 @@ public interface CirugiaRepository extends JpaRepository<Cirugia, Long> {
 
     // Tip Pro: Buscar todas las cirugías activas (útil para el monitor general)
     List<Cirugia> findByEstado(EstadoCirugia estado);
+
+    Optional<Cirugia> findFirstByQuirofanoIdAndEstadoOrderByHoraInicioDesc(
+        Long quirofanoId, EstadoCirugia estado
+    );
+
+    Optional<Cirugia> findFirstByQuirofanoIdAndEstadoOrderByHoraFinRealDesc(
+        Long quirofanoId, EstadoCirugia estado
+    );
 }
